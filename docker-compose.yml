@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  mysql:
+    platform: linux/amd64
+    image: mysql:8.0.19
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=pass
+
+  postgres:
+    platform: linux/amd64
+    image: postgres:12.0-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=app1
+      - POSTGRES_USER=user1
+      - POSTGRES_PASSWORD=pass1
