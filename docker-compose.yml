@@ -1,5 +1,6 @@
 version: '3.7'
 services:
+
   mysql:
     platform: linux/amd64
     image: mysql:8.0.19
@@ -17,6 +18,11 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_DB=app1
-      - POSTGRES_USER=user1
-      - POSTGRES_PASSWORD=pass1
+      - POSTGRES_DB=app
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+
+  simulator:
+    build: ./gate-simulator
+    ports:
+      - '9999:9999'
