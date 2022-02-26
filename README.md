@@ -1,54 +1,95 @@
-## Дипломный проект профессии «Тестировщик»
+### Дипломный проект по курсу «Тестировщик ПО»
 
+___
+
+##### О проекте:
+
+Дипломный проект представляет собой автоматизацию тестирования комплексного сервиса, взаимодействующего с СУБД и API Банка.  
+
+Приложение предлагает купить тур по определённой цене с помощью двух способов:  
+
+* Обычная оплата по дебетовой карте  
+  
+* Уникальная технология: выдача кредита по данным банковской карты.  
+  
+
+Само приложение не обрабатывает данные по картам, а пересылает их банковским сервисам:
+
+* сервису платежей;
+  
+* кредитному сервису
+___
 ### Документация
-3
+
 * [План тестирования](https://github.com/Chzhanchik/QADiplom/blob/master/documents/Plan.md "План тестирования")
-  4
+  
 * [Отчет по итогам тестирования](https://github.com/Chzhanchik/QADiplom/blob/master/documents/Report.md "Отчет по итогам тестирования")
-  5
+  
 * [Комплексный отчет по итогам процесса автоматизации](https://github.com/Chzhanchik/QADiplom/blob/master/documents/Summary.md "Комплексный отчет по итогам процесса автоматизации")
-  
-### О проекте
 
-#### Проект представляет собой комплексное автоматизированное тестирование сервиса по покупке туров через интернет-банк. Купить тур можно с помощью двух способов:
 
-* Покупка по дебетовой карте
+___
 
-* Покупка в кредит
-  
-#### Само приложение не обрабатывает данные по картам, а пересылает их банковским сервисам:
+##### **Инструкция по запуску тестов:**
 
-* сервису платежей (Payment Gate)
-
-* кредитному сервису (Credit Gate)
-  
-#### Приложение в собственной СУБД сохраняет информацию о том, каким способом был совершён платёж и успешно ли он был совершён.
-
-### Запуск Авто-Тестов.
-
-* Запустить в Docker контейнеры СУБД MySQl, PostgeSQL и Node.js
-  
-* Запустить контейнеры в терминале
-  
-1. Нужно ввести команду в терминале:
-  
-2. Зпускаем SUT, для этого в новой вкладке в терминале вводим следующую команду:
+Предварительная подготовка к тестированию:
+1. Установить IntelliJ Idea. Скачать и ознакомиться с документацией можно на официальном сайте https://www.jetbrains.com/ru-ru/idea/.
    
-* Для СУБД MySQL: **java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar**
-  
-* Для СУБД PostgreSQL: **java -jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app artifacts/aqa-shop.jar**
-  
-3. Запускаем автотесты, следующе командой:
+2. Установить Docker Desktop. Скачать и ознакомиться с документацией можно на официальном сайте https://www.docker.com/get-started.
+
+_Для запуска тестов необходимо:_
+
+1. Скачать проект с удаленного репозитория на свой локальный, с помощью команды `git clone https://github.com/ulyana190909/QA-Diploma_Project`
    
-* Для MySQL:
-  **gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app**
-  
-* Для PostgreSQL: 
-  **gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app**
-  
-4. Сгенерировать отчеты:
+2. Открыть проект на установленной заранее IntelliJ Idea
    
-* **gradlew allureReport**
-* **gradlew allureServe**
- 
-5. Для завершения работы allureServe выполнить команду: **Ctrl + С далее Y**
+3. Развернуть контейнеры с помощью команды `docker-compose up` в терминале
+   
+4. В соседней вкладке запустить само приложение либо командой   
+   
+   `java -Dserver.port=8090 -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar artifacts/aqa-shop.jar` - для БД Postgresql
+
+   либо  
+   
+   `java -Dserver.port=8090 -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar` - для БД MysSQL  
+   
+5. Убедиться в том, что приложение запустилось, в логах будет строка:  
+   
+   `INFO 10688--- [  main] ru.netology.shop.ShopApplication  : Starting ShopApplication v0.0.1-SNAPSHOT on LAPTOP-NF0QCEOC with PID 10688`
+   
+6. Запустить тесты командой  
+   
+   `gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app` -  для БД MysSQL  
+   
+   либо  
+   
+   `gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app` - для БД Postgresql  
+   
+7. Открыть отчет о прохождении тестов командой `gradlew allureServe`
+   
+___
+
+##### **Подготовка отчета Allure**
+
+При необходимости создания отчета тестирования, запустить тесты следующим образом:   
+
+`gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app аllureReport` -  для БД MysSQL
+
+либо
+
+`gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app аllureReport` - для БД Postgresql  
+
+`allureReport` - используется при первой генерации отчета.  
+
+
+При повторной генерации отчета запускать тесты командой:  
+
+`gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app allureServe` -  для БД MysSQL 
+
+либо
+
+`gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app allureServe` - для БД Postgresql  
+
+Отчет будет открываться после прохождения тестов автоматически в браузере.  
+
+Если потребуется преждевременно завершить прохождение тестов, набрать команду Ctrl+C, далее Y.
