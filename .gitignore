@@ -4,8 +4,7 @@ node_modules
 .idea
 target
 *.iml
+settings.gradle
+gradlew.bat
 .gradle
-.allure
-*.iws
-*.ipr
-out/
+build
