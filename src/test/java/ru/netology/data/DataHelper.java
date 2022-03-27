@@ -28,7 +28,7 @@ public class DataHelper {
         return "DECLINED";
     }
 
-    public static String getCardNumberIncomplete() {  return "4444"; }
+    public static String getCardNumberIncomplete() {  return "4444 4444 4444 444"; }
 
     public static String getCardNumberZero() {
         return "0000 0000 0000 0000";
@@ -39,6 +39,8 @@ public class DataHelper {
     }
 
     public static String getCardNumberOverLimit() { return "4444 4444 4444 4441 1"; }
+
+    public static String getCardNumberUnderLimit() { return "4444"; }
 
     public static String getValueText() { return "тест"; }
 
@@ -57,8 +59,6 @@ public class DataHelper {
 
     public static String getIncompleteMonth() { return "1";}
 
-    public static String getMonthOverLimit() { return "022"; }
-
     public static String getValidYear() {
         LocalDate localDate = LocalDate.now();
         return String.format("%ty", localDate.plusYears(2));
@@ -69,7 +69,7 @@ public class DataHelper {
         return String.format("%ty", localDate.minusYears(2));
     }
 
-    public static String getYearOverLimit() {
+    public static String getDurationOverLimit() {
         return "202";
     }
 
@@ -79,8 +79,16 @@ public class DataHelper {
         return faker.name().firstName() + " " + faker.name().lastName().replaceAll("[^A-Za-z]", "");
     }
 
+    public static String getUnderLimitOwner() {
+        return "V";
+    }
+
+    public static String getOverLimitOwner() {
+        return "Testtesttesttesttest";
+    }
+
     public static String getInvalidOwner() {
-        return "Frio#*?%731";
+        return "Bla#*?%732";
     }
 
     public static String getDataWithoutSpaces() { return "IvanovPetr";}
@@ -88,6 +96,12 @@ public class DataHelper {
     public static String getIncompleteOwner() {
         return "Ivan";
     }
+
+    public static String getOwnerOnlySurname() {
+        return "Petrov";
+    }
+
+    public static String getOwnerLowerCase() {return "ivan petrov";}
 
     public static String getOwnerNumbers() {
         return " 12345";
@@ -105,13 +119,10 @@ public class DataHelper {
 
     public static String getIncompleteCvс() {return "12"; }
 
+    public static String getZeroCvv() {return "000"; }
+
     public static String getCvcOverLimit() {
         return "2777";
-    }
-
-    public static String getInvalidYearMoreThanFive() {
-        LocalDate localDate = LocalDate.now();
-        return String.format("%ty", localDate.plusYears(6));
     }
 
     public static String getInvalidOwnerRus() {
