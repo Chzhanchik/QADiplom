@@ -95,7 +95,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.expectRejectionFromBank();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -106,7 +106,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitNecessaryFillOutField();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -150,7 +150,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -172,7 +172,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidFormat();
     }
 
 
@@ -184,7 +184,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidYear();
     }
 
     @Test
@@ -206,7 +206,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -217,7 +217,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -228,7 +228,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitInvalidDuration();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -294,7 +294,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getOwnerOnlySurname();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.waitNecessaryFillOutField();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
@@ -303,6 +303,17 @@ public class BuyWithoutCreditTest {
         val month = DataHelper.getValidMonth();
         val year = DataHelper.getValidYear();
         val owner = DataHelper.getOwnerLowerCase();
+        val cvс = DataHelper.getValidCvс();
+        paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
+        paymentPage.waitInvalidFormat();
+    }
+
+    @Test
+    void checkingOwnerInvalid() { /*Покупка тура при вводе невалидного владельца*/
+        val cardNumber = DataHelper.getFirstCardNumber();
+        val month = DataHelper.getValidMonth();
+        val year = DataHelper.getValidYear();
+        val owner = DataHelper.getInvalidOwner();
         val cvс = DataHelper.getValidCvс();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
         paymentPage.waitInvalidFormat();
@@ -327,7 +338,7 @@ public class BuyWithoutCreditTest {
         val owner = DataHelper.getValidOwner();
         val cvс = DataHelper.getZeroCvv();
         paymentPage.fillOutFields(cardNumber, month, year, owner, cvс);
-        paymentPage.expectRejectionFromBank();
+        paymentPage.waitInvalidFormat();
     }
 
     @Test
